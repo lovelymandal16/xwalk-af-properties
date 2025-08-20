@@ -107,7 +107,7 @@
                       "value": "fd/af/components/guidesubmittype/restendpoint"
                   },
                   {
-                      "name": "Persist to Spreadsheet",
+                      "name": "Persist to Spreadsheet ",
                       "value": "spreadsheet"
                   }
               ],

@@ -46,10 +46,15 @@
               "name": "thankYouOption",
               "label": "On Submit",
               "valueType": "string",
+              "readOnly": true,
               "options": [
                   {
                       "name": "Show message",
                       "value": "message"
+                  },
+                  {
+                    "name": "Redirect to URL",
+                    "value": "page"
                   }
               ]
           },
@@ -61,121 +66,53 @@
               "condition": { "==": [{ "var": "thankYouOption" }, "message"] }
           },
           {
+            "component": "text",
+            "name": "redirect",
+            "label": "Redirect to URL",
+            "valueType": "string",
+            "condition": { "==": [{ "var": "thankYouOption" }, "page"] }
+        },
+          {
               "component": "select",
               "valueType": "string",
               "name": "actionType",
               "label": "Submit Action",
               "options": [
                   {
-                      "name": "Submit to REST endpoint",
-                      "value": "fd/af/components/guidesubmittype/restendpoint"
+                    "name": "Send email",
+                    "value": "fd/af/components/guidesubmittype/email"
                   },
                   {
-                      "name": "Send email",
-                      "value": "fd/af/components/guidesubmittype/email"
+                    "name": "Invoke a Power Automate flow",
+                    "value": "fd/powerautomate/components/actions/pasubmit"
+                  },
+                  {
+                    "name": "Submit to SharePoint",
+                    "value": "fd/afaddon/components/actions/sharepointstorage"
+                  },
+                  {
+                    "name": "Invoke a Workfront Fusion scenario",
+                    "value": "fd/workfrontfusion/components/actions/wfsubmit"
+                  },
+                  {
+                    "name": "Submit using Form Data Model",
+                    "value": "fd/afaddon/components/actions/fdm"
+                  },
+                  {
+                    "name": "Submit to Azure Blob Storage",
+                    "value": "fd/afaddon/components/actions/azureblobstorage"
+                  },
+                  {
+                      "name": "Submit to REST endpoint",
+                      "value": "fd/af/components/guidesubmittype/restendpoint"
                   },
                   {
                       "name": "Persist to Spreadsheet",
                       "value": "spreadsheet"
                   }
               ],
-              "value" : ""
-          },
-          {
-              "component": "boolean",
-              "name": "enableRestEndpointPost",
-              "label": "Enable POST request",
-              "valueType": "string",
-              "condition": { "==": [{ "var": "actionType" }, "fd/af/components/guidesubmittype/restendpoint"] }
-          },
-          {
-              "component": "text",
-              "name": "restEndpointPostUrl",
-              "label": "URL For POST request",
-              "valueType": "string",
-              "condition": { "==": [{ "var": "actionType" }, "fd/af/components/guidesubmittype/restendpoint"] }
-          },
-          {
-              "condition": { "==": [{ "var": "actionType" }, "spreadsheet"] },
-              "component": "text",
-              "name": "spreadsheetUrl",
-              "label": "Spreadsheet Url",
-              "valueType": "string"
-          },
-          {
-              "component": "container",
-              "name": "email",
-              "label": "Email Configuration",
-              "collapsible": false,
-              "condition": { "==": [{ "var": "actionType" }, "fd/af/components/guidesubmittype/email"] },
-              "fields": [
-                  {
-                      "component": "text",
-                      "name": "from",
-                      "label": "From",
-                      "valueType": "string"
-                  },
-                  {
-                      "component": "text",
-                      "name": "mailto",
-                      "label": "To",
-                      "valueType": "string",
-                      "multi": true,
-                      "required": true
-                  },
-                  {
-                      "component": "text",
-                      "name": "cc",
-                      "label": "CC",
-                      "valueType": "string",
-                      "multi": true
-                  },
-                  {
-                      "component": "text",
-                      "name": "bcc",
-                      "label": "BCC",
-                      "valueType": "string",
-                      "multi": true
-                  },
-                  {
-                      "component": "text",
-                      "name": "subject",
-                      "label": "Subject",
-                      "valueType": "string"
-                  },
-                  {
-                      "component": "boolean",
-                      "name": "useExternalEmailTemplate",
-                      "label": "Use external template",
-                      "valueType": "boolean"
-                  },
-                  {
-                    "component": "boolean",
-                    "name": "useHtmlTemplate",
-                    "label": "Use html template",
-                    "valueType": "boolean"
-                  },
-                  {
-                      "component": "aem-content",
-                      "name": "templatePath",
-                      "label": "External template path",
-                      "valueType": "string",
-                      "condition": { "==": [{ "var": "useExternalEmailTemplate" }, true] }
-                  },
-                  {
-                      "component": "richtext",
-                      "name": "template",
-                      "label": "Email template",
-                      "valueType": "string",
-                      "condition": { "!=": [{ "var": "useExternalEmailTemplate" }, true] }
-                  },
-                  {
-                      "component": "boolean",
-                      "name": "includeAttachments",
-                      "label": "Include attachments",
-                      "valueType": "boolean"
-                  }
-              ]
+              "value" : "",
+              "description": "To view the complete list of configurations, or to edit the Submit Action and Thank You options, go to Edit Form Properties."
           }
       ]
     },
